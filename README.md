@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/gopowersupply/intelcpu.svg?branch=master)](https://travis-ci.org/gopowersupply/intelcpu)
 [![Go Report Card](https://goreportcard.com/badge/gopowersupply/intelcpu)](http://goreportcard.com/report/gopowersupply/intelcpu)
 [![GoDoc](https://godoc.org/github.com/gopowersupply/intelcpu?status.svg)](https://godoc.org/github.com/gopowersupply/intelcpu)
-[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/gopowersupply/intelcpu)](https://github.com/intelcpu/releases)
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/gopowersupply/intelcpu)](https://github.com/gopowersupply/intelcpu/releases)
 [![GitHub last commit](https://img.shields.io/github/last-commit/gopowersupply/intelcpu)](https://intelcpu/commits/master)
 [![GitHub issues](https://img.shields.io/github/issues/gopowersupply/intelcpu)](https://intelcpu/issues)
 
