@@ -1,61 +1,122 @@
-# What is it?
+[![GitHub](https://img.shields.io/github/license/gopowersupply/intelcpu)](https://github.com/gopowersupply/intelcpu/blob/master/LICENSE)
+[![Go version](https://img.shields.io/github/go-mod/go-version/gopowersupply/intelcpu)](https://blog.golang.org/go1.13)
+[![Build Status](https://travis-ci.org/gopowersupply/intelcpu.svg?branch=master)](https://travis-ci.org/gopowersupply/intelcpu)
+[![Go Report Card](https://goreportcard.com/badge/gopowersupply/intelcpu)](http://goreportcard.com/report/gopowersupply/intelcpu)
+[![GoDoc](https://godoc.org/github.com/gopowersupply/intelcpu?status.svg)](https://godoc.org/github.com/gopowersupply/intelcpu)
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/gopowersupply/intelcpu)](https://github.com/gopowersupply/intelcpu/releases)
+[![GitHub last commit](https://img.shields.io/github/last-commit/gopowersupply/intelcpu)](https://github.com/gopowersupply/intelcpu/commits/master)
+[![GitHub issues](https://img.shields.io/github/issues/gopowersupply/intelcpu)](https://github.com/gopowersupply/intelcpu/issues)
 
-Intel CPU control package.  
-Documentation can be found here.
+The package to allow interaction with intel_pstate driver to drive CPU frequency and politics.  
+
+**intel_pstate** driver must be installed and activated. Usually, it __already included in Linux kernel 4.13 for Sandy Bridge and later__ CPUs.
+
+Get it from github:
+```bash
+go get -u https://github.com/gopowersupply/intelcpu
+```
+
+Documentation can be [found here](https://godoc.org/github.com/gopowersupply/intelpower)
 
 # Requirements
 
 - `intel_pstate` CPU Performance Scaling Driver
 
-# Example
+# Examples
 
+Simple example to change TurboBoost status:
 ```go
-pwr := intelpower.New()
-
-if err := pwr.CheckDriver(); err != nil {
-	panic(err)
-}
-
-stat, _ := pwr.GetStatus()
-switch stat {
-case PStateStatusActive:
-	fmt.Println("All is ok")
-case PStateStatusPassive:
-	fmt.Println("Some troubles, some actions maybe ignored")
-case PStateStatusOff:
-	fmt.Println("Driver is off, actions won't take effects")
-}
-
-// CPU name
-cpuName, _ := pwr.GetCPUName()
-
-// temperature from main thermal sensor
-temp, _ := pwr.GetTemp()
-
-// TurboBoost checking and enabling
-if turbo, _ := pwr.IsTurbo(); !turbo {
-	pwr.SetTurbo(true)
-}
-
-// Always maximum frequency
-_ := pwr.GetMinPerf(1)
-
-// Working with CPUs
-cpus, _ := pwr.GetCPUs()
-
-// CPU frequency
-freq, _ := cpus[0].GetFreq()
-baseFreq, _ := cpus[0].GetBaseFreq()
-maxFreq, _ := cpus[0].GetMaxFreq()
-minFreq, _ := cpus[0].GetMinFreq()
-
-// CPU disabling
-cpus[3].SetOnline(false)
-
-// CPU governor mode
-cpus[3].SetGovernor = CPUGovernorPerformance
-
-// CPU preference mode
-cpus[3].SetPreference = CPUPreferencePerformance
-
+    cpu := intelcpu.New()
+    turbo, _ := cpu.GetTurbo()
+    if turbo {
+    	cpu.SetTurbo(false)
+    } else {
+    	cpu.SetTurbo(true)
+    }
 ```
+
+In real projects strongly recommended to check for driver and its status:
+```go
+    cpu := intelcpu.New()
+    
+    if err := cpu.CheckDriver(); err != nil {
+    	// [...] Some troubles or driver not installed
+    }
+    
+    status, _ := cpu.GetStatus()
+    switch status {
+    case intelcpu.PStateStatusActive:
+    	// [...] All is ok
+    case intelcpu.PStateStatusPassive:
+    	// [...] Something wrong, working partially
+    case intelcpu.PStateStatusOff:
+    	// [...] Driver disabled, nothing to work
+    }
+```
+
+You can enable or disable some cores. Except first, of course:
+```go
+    cpu := intelcpu.New()
+        
+    cores, _ := cpu.GetCores()
+    
+    for _, core := range cores {
+    	// First core will return false and its status always will be online
+    	isOfflineAvailable, _ := core.IsOfflineAvailable()
+    	    	
+    	isOnline, _ := core.IsOnline()
+    	fmt.Printf("Core %d is online: %v", isOnline)
+    	
+    	// If core can be offline then do it
+    	if isOfflineAvailable {
+    		core.SetOnline(false)
+    	}    	
+    }
+```
+
+You can change CPU frequency limitation also:
+```go
+    cpu := intelcpu.New()    
+    cores, _ := cpu.GetCores()
+    maxFreq, _ := cores[0].GetMaxAvailableFreq()
+    cpu.SetMaxPerf(maxFreq * 0.75)
+```
+
+Core performance and governor politics also can be changed:
+```go
+    cpu := intelcpu.New()
+    cores, _ := cpu.GetCores()
+    
+    for _, core := range cores {
+    	core.SetGovernor(intelcpu.CPUGovernorPerformance)
+    	core.SetPreference(intelcpu.CPUPreferencePerformance)
+    }
+```
+
+## Errors handling
+
+This package has an own error type `CPUError`  
+You can pass the package errors through your functions then detect it via `errors.As`:
+```go
+    func ExecUnexpected() error {
+    	// [...] Here your other returns with own errors
+        cpu := intelcpu.New()
+        _, err := cpu.GetCore(20000)
+        if err != nil {
+        	return err
+        }
+        // [...] Here your other returns with own errors
+    }
+
+    func main() {
+    	err := ExecUnexpected()    	
+    	if intelcpu.IsCPUError(err) {
+    		// [...] to do anything
+    	} else {
+    		// [...] to do something other    		
+    	}
+    }
+```
+And you can use `errors.As(err, &intelcpu.CPUError{})` as alternative.
+
+TODO: /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed for OnUserspace governor

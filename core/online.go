@@ -1,14 +1,14 @@
-package intelpower
+package core
 
 import (
+	"intelcpu/common"
 	"os"
 	"path"
 )
 
 // IsOfflineAvailable - Returns cpu offline availability
-func (cpu *CPU) IsOfflineAvailable() (bool, error) {
-	_, err := os.Stat(path.Join(cpu.cpuRoot, "online"))
-
+func (core *Core) IsOfflineAvailable() (bool, error) {
+	_, err := os.Stat(path.Join(core.Path, "online"))
 	if err != nil {
 		if os.IsNotExist(err) {
 			return false, nil
@@ -20,8 +20,8 @@ func (cpu *CPU) IsOfflineAvailable() (bool, error) {
 }
 
 // IsOnline - Returns current cpu online status
-func (cpu *CPU) IsOnline() (bool, error) {
-	canBeOffline, err := cpu.IsOfflineAvailable()
+func (core *Core) IsOnline() (bool, error) {
+	canBeOffline, err := core.IsOfflineAvailable()
 	if err != nil {
 		return false, err
 	}
@@ -30,7 +30,7 @@ func (cpu *CPU) IsOnline() (bool, error) {
 		return true, nil
 	}
 
-	resp, err := cpu.pwr.cmdRead(cpu.cpuRoot, "online")
+	resp, err := common.StatRead(core.Path, "online")
 	if err != nil {
 		return false, err
 	}
@@ -44,13 +44,13 @@ func (cpu *CPU) IsOnline() (bool, error) {
 }
 
 // SetOnline - Sets cpu online status
-func (cpu *CPU) SetOnline(online bool) error {
+func (core *Core) SetOnline(online bool) error {
 	stat := "1"
 	if !online {
 		stat = "0"
 	}
 
-	err := cpu.pwr.cmdWrite(stat, cpu.cpuRoot, "online")
+	err := common.StatWrite(stat, core.Path, "online")
 	if err != nil {
 		return err
 	}
