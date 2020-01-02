@@ -124,5 +124,3 @@ You can pass the package errors through your functions then detect it via `error
     }
 ```
 And you can use `errors.As(err, &intelcpu.CPUError{})` as alternative.
-
-TODO: /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed for OnUserspace governor
