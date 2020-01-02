@@ -1,4 +1,4 @@
-package intelcpu
+package cpu
 
 import (
 	"fmt"
