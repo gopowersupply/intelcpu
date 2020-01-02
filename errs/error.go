@@ -13,7 +13,7 @@ type CPUError struct {
 	inner error
 }
 
-// NewCPUError - Wrapper for errors in this package
+// errs.NewCPUError - Wrapper for errors in this package
 func NewCPUError(err error) CPUError {
 	return CPUError{
 		inner: err,
