@@ -2,7 +2,7 @@ package intelcpu
 
 import (
 	"fmt"
-	"intelcpu/common"
+	"github.com/gopowersupply/intelcpu/common"
 )
 
 // IsTurbo - TurboBoost status
