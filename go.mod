@@ -1,3 +1,3 @@
-module github.com/gopowersupply/intelcpu
+module intelcpu
 
 go 1.13
