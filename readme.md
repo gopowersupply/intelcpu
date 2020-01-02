@@ -77,9 +77,7 @@ You can enable or disable some cores. Except first, of course:
 You can change CPU frequency limitation also:
 ```go
     cpu := intelcpu.New()    
-    cores, _ := cpu.GetCores()
-    maxFreq, _ := cores[0].GetMaxAvailableFreq()
-    cpu.SetMaxPerf(maxFreq * 0.75)
+    cpu.SetMaxPerf(0.5) // 50% of max
 ```
 
 Core performance and governor politics also can be changed:
