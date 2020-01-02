@@ -1,3 +1,5 @@
+github.com/gopowersupply/intelcpu v0.0.0-20200102210137-52fb32c5346f h1:odOEsPk7Fh6WKjHqkTHmNtQV2vF57kHMoIAu8EmapNA=
+github.com/gopowersupply/intelcpu v0.0.0-20200102210137-52fb32c5346f/go.mod h1:YjvnZZv4/tKD7SPJ9jvKB4grMlCMY4Y7LEO/6mizNHQ=
 github.com/gopowersupply/intelcpu/common v0.0.0-20200102204126-a66b630402cb h1:IWTkDNfxscP9ATG+lsnTR69oE4CD5TRZ0sstzvgcW50=
 github.com/gopowersupply/intelcpu/common v0.0.0-20200102204126-a66b630402cb/go.mod h1:RK9H60GZtIEaevGQJ3W4Ef6I0M+7jN2sY9AHzr+snKA=
 github.com/gopowersupply/intelcpu/core v0.0.0-20200102204126-a66b630402cb h1:rvuZpGV3+MjaCDG6muBseqjysT61zYS9gKzLcBFgvDg=
