@@ -16,7 +16,7 @@ Get it from github:
 go get -u https://github.com/gopowersupply/intelcpu
 ```
 
-Documentation can be [found here](https://godoc.org/github.com/gopowersupply/intelpower)
+Documentation can be [found here](https://godoc.org/github.com/gopowersupply/intelcpu)
 
 # Requirements
 
