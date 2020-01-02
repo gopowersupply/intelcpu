@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/gopowersupply/intelcpu/common"
 	"github.com/gopowersupply/intelcpu/core"
+	"github.com/gopowersupply/intelcpu/errs"
 	"os"
 	"path"
 	"runtime"
@@ -27,7 +28,7 @@ func (cpu *CPU) CheckDriver() error {
 	_, err := os.Stat(path.Join(cpu.path, "intel_pstate"))
 	if err != nil {
 		if os.IsNotExist(err) {
-			return NewCPUError(errors.New("intel_pstate dir isn't exist"))
+			return errs.NewCPUError(errors.New("intel_pstate dir isn't exist"))
 		}
 		return err
 	}
@@ -39,7 +40,7 @@ func (cpu *CPU) CheckDriver() error {
 func (cpu *CPU) GetStatus() (PStateStatus, error) {
 	resp, err := common.StatRead(cpu.path, "intel_pstate", "status")
 	if err != nil {
-		return "", NewCPUError(err)
+		return "", errs.NewCPUError(err)
 	}
 
 	return PStateStatus(resp), nil
@@ -52,7 +53,7 @@ func (cpu *CPU) GetCore(num uint16) (*core.Core, error) {
 	_, err := os.Stat(path)
 	if err != nil {
 		if os.IsNotExist(err) {
-			return nil, NewCPUError(errors.New("incorrect cpu number"))
+			return nil, errs.NewCPUError(errors.New("incorrect cpu number"))
 		}
 		return nil, err
 	}

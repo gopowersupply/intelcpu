@@ -3,6 +3,7 @@ package cpu
 import (
 	"errors"
 	"github.com/gopowersupply/intelcpu/common"
+	"github.com/gopowersupply/intelcpu/errs"
 	"strconv"
 )
 
@@ -24,7 +25,7 @@ func (cpu *CPU) GetMinPerf() (float32, error) {
 // SetMinPerf - Sets min performance percent
 func (cpu *CPU) SetMinPerf(prc float32) error {
 	if prc < 0 || prc > 1 {
-		return NewCPUError(errors.New("percent must be in [0..1]"))
+		return errs.NewCPUError(errors.New("percent must be in [0..1]"))
 	}
 
 	err := common.StatWrite(strconv.Itoa(int(prc*100)), cpu.path, "intel_pstate", "min_perf_pct")
@@ -53,7 +54,7 @@ func (cpu *CPU) GetMaxPerf() (float32, error) {
 // SetMaxPerf - Sets max performance percent
 func (cpu *CPU) SetMaxPerf(prc float32) error {
 	if prc < 0 || prc > 1 {
-		return NewCPUError(errors.New("percent must be in [0..1]"))
+		return errs.NewCPUError(errors.New("percent must be in [0..1]"))
 	}
 
 	err := common.StatWrite(strconv.Itoa(int(prc*100)), cpu.path, "intel_pstate", "max_perf_pct")

@@ -1,4 +1,4 @@
-package cpu
+package errs
 
 import (
 	"errors"

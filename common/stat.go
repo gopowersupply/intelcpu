@@ -1,6 +1,7 @@
 package common
 
 import (
+	"github.com/gopowersupply/intelcpu/errs"
 	"io/ioutil"
 	"path"
 )
@@ -11,7 +12,7 @@ func StatRead(filepath ...string) (string, error) {
 
 	data, err := ioutil.ReadFile(file)
 	if err != nil {
-		return "", err
+		return "", errs.NewCPUError(err)
 	}
 
 	return string(data), nil
@@ -22,7 +23,7 @@ func StatWrite(data string, filepath ...string) error {
 	file := path.Join(filepath...)
 
 	if err := ioutil.WriteFile(file, []byte(data), 222); err != nil {
-		return err
+		return errs.NewCPUError(err)
 	}
 
 	return nil

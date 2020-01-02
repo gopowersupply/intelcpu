@@ -3,6 +3,7 @@ package cpu
 import (
 	"fmt"
 	"github.com/gopowersupply/intelcpu/common"
+	"github.com/gopowersupply/intelcpu/errs"
 )
 
 // IsTurbo - TurboBoost status
@@ -19,7 +20,7 @@ func (cpu *CPU) IsTurbo() (bool, error) {
 		return true, nil
 	}
 
-	return false, NewCPUError(fmt.Errorf("unknown no_turbo status: %s", resp))
+	return false, errs.NewCPUError(fmt.Errorf("unknown no_turbo status: %s", resp))
 }
 
 // SetTurbo - Changes TurboBoost status
