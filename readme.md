@@ -91,6 +91,14 @@ Core performance and governor politics also can be changed:
     }
 ```
 
+Short way:
+```go
+    cpu := intelcpu.New()
+    cores, _ := cpu.GetCores()
+    cores.SetGovernor(intelcpu.CPUGovernorPerformance)
+    cores.SetPreference(intelcpu.CPUPreferencePerformance)
+```
+
 ## Errors handling
 
 This package has an own error type `CPUError`  

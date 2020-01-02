@@ -114,3 +114,28 @@ func (core *Core) SetMinFreq(freq uint32) error {
 
 	return nil
 }
+
+// GetSpeed - Returns core speed
+func (core *Core) GetSpeed() (uint32, error) {
+	resp, err := common.StatRead(core.Path, "cpufreq", "scaling_setspeed")
+	if err != nil {
+		return 0, err
+	}
+
+	freq, err := strconv.ParseUint(resp, 10, 32)
+	if err != nil {
+		return 0, err
+	}
+
+	return uint32(freq), nil
+}
+
+// SetSpeed - Sets core speed
+func (core *Core) SetSpeed(freq uint32) error {
+	err := common.StatWrite(strconv.FormatUint(uint64(freq), 10), core.Path, "cpufreq", "scaling_setspeed")
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
