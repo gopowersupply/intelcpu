@@ -1,7 +1,7 @@
 package intelcpu
 
 import (
-	"intelcpu/common"
+	"github.com/gopowersupply/intelcpu/common"
 	"strconv"
 )
 

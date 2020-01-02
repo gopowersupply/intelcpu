@@ -1,7 +1,7 @@
 package core
 
 import (
-	"intelcpu/common"
+	"github.com/gopowersupply/intelcpu/common"
 	"os"
 	"path"
 )
