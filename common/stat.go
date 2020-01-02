@@ -1,7 +1,6 @@
 package common
 
 import (
-	"intelcpu"
 	"io/ioutil"
 	"path"
 )
@@ -12,7 +11,7 @@ func StatRead(filepath ...string) (string, error) {
 
 	data, err := ioutil.ReadFile(file)
 	if err != nil {
-		return "", intelcpu.NewCPUError(err)
+		return "", err
 	}
 
 	return string(data), nil
@@ -23,7 +22,7 @@ func StatWrite(data string, filepath ...string) error {
 	file := path.Join(filepath...)
 
 	if err := ioutil.WriteFile(file, []byte(data), 222); err != nil {
-		return intelcpu.NewCPUError(err)
+		return err
 	}
 
 	return nil
