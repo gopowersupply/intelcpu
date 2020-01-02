@@ -1,11 +1,11 @@
-[![GitHub](https://img.shields.io/github/license/gopowersupply/intelcpu)](https://github.com/gopowersupply/intelcpu/blob/master/LICENSE)
+[![GitHub](https://img.shields.io/github/license/gopowersupply/intelcpu)](https://intelcpu/blob/master/LICENSE)
 [![Go version](https://img.shields.io/github/go-mod/go-version/gopowersupply/intelcpu)](https://blog.golang.org/go1.13)
 [![Build Status](https://travis-ci.org/gopowersupply/intelcpu.svg?branch=master)](https://travis-ci.org/gopowersupply/intelcpu)
 [![Go Report Card](https://goreportcard.com/badge/gopowersupply/intelcpu)](http://goreportcard.com/report/gopowersupply/intelcpu)
 [![GoDoc](https://godoc.org/github.com/gopowersupply/intelcpu?status.svg)](https://godoc.org/github.com/gopowersupply/intelcpu)
-[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/gopowersupply/intelcpu)](https://github.com/gopowersupply/intelcpu/releases)
-[![GitHub last commit](https://img.shields.io/github/last-commit/gopowersupply/intelcpu)](https://github.com/gopowersupply/intelcpu/commits/master)
-[![GitHub issues](https://img.shields.io/github/issues/gopowersupply/intelcpu)](https://github.com/gopowersupply/intelcpu/issues)
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/gopowersupply/intelcpu)](https://intelcpu/releases)
+[![GitHub last commit](https://img.shields.io/github/last-commit/gopowersupply/intelcpu)](https://intelcpu/commits/master)
+[![GitHub issues](https://img.shields.io/github/issues/gopowersupply/intelcpu)](https://intelcpu/issues)
 
 The package to allow interaction with intel_pstate driver to drive CPU frequency and politics.  
 

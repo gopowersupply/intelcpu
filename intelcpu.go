@@ -3,8 +3,8 @@ package intelcpu
 import (
 	"errors"
 	"fmt"
-	"github.com/gopowersupply/intelcpu/common"
-	"github.com/gopowersupply/intelcpu/core"
+	"intelcpu/common"
+	"intelcpu/core"
 	"os"
 	"path"
 	"runtime"
