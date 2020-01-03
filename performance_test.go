@@ -1,7 +1,7 @@
 package intelcpu
 
 // How to know what is current max freq?
-func ExampleCPU_GetMaxPerf_GetCurrentMaxFreq() {
+func ExampleCPU_GetMaxPerf() {
 	cpu := New()
 	cores, _ := cpu.GetCores()
 	maxPerf, _ := cpu.GetMaxPerf()
@@ -14,7 +14,7 @@ func ExampleCPU_GetMaxPerf_GetCurrentMaxFreq() {
 }
 
 // How to know what is a real lowest perf?
-func ExampleCPU_SetMinPerf_RealLowestPerf() {
+func ExampleCPU_SetMinPerf() {
 	cpu := New()
 	cores, _ := cpu.GetCores()
 
