@@ -2,13 +2,11 @@ package intelcpu
 
 import (
 	"fmt"
-	"github.com/gopowersupply/intelcpu/common"
-	"github.com/gopowersupply/intelcpu/errs"
 )
 
 // IsTurbo - TurboBoost status
 func (cpu *CPU) IsTurbo() (bool, error) {
-	resp, err := common.StatRead(cpu.path, "intel_pstate", "no_turbo")
+	resp, err := StatRead(cpu.path, "intel_pstate", "no_turbo")
 	if err != nil {
 		return false, err
 	}
@@ -20,7 +18,7 @@ func (cpu *CPU) IsTurbo() (bool, error) {
 		return true, nil
 	}
 
-	return false, errs.NewCPUError(fmt.Errorf("unknown no_turbo status: %s", resp))
+	return false, NewCPUError(fmt.Errorf("unknown no_turbo status: %s", resp))
 }
 
 // SetTurbo - Changes TurboBoost status
@@ -30,7 +28,7 @@ func (cpu *CPU) SetTurbo(status bool) error {
 		stat = "0"
 	}
 
-	err := common.StatWrite(stat, cpu.path, "intel_pstate", "no_turbo")
+	err := StatWrite(stat, cpu.path, "intel_pstate", "no_turbo")
 	if err != nil {
 		return err
 	}

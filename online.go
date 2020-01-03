@@ -1,7 +1,6 @@
-package core
+package intelcpu
 
 import (
-	"github.com/gopowersupply/intelcpu/common"
 	"os"
 	"path"
 )
@@ -30,7 +29,7 @@ func (core *Core) IsOnline() (bool, error) {
 		return true, nil
 	}
 
-	resp, err := common.StatRead(core.Path, "online")
+	resp, err := StatRead(core.Path, "online")
 	if err != nil {
 		return false, err
 	}
@@ -50,7 +49,7 @@ func (core *Core) SetOnline(online bool) error {
 		stat = "0"
 	}
 
-	err := common.StatWrite(stat, core.Path, "online")
+	err := StatWrite(stat, core.Path, "online")
 	if err != nil {
 		return err
 	}

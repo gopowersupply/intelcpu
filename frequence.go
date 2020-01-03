@@ -1,13 +1,12 @@
-package core
+package intelcpu
 
 import (
-	"github.com/gopowersupply/intelcpu/common"
 	"strconv"
 )
 
 // GetFreq - Returns current core frequency
 func (core *Core) GetFreq() (uint32, error) {
-	resp, err := common.StatRead(core.Path, "cpufreq", "scaling_cur_freq")
+	resp, err := StatRead(core.Path, "cpufreq", "scaling_cur_freq")
 	if err != nil {
 		return 0, err
 	}
@@ -22,7 +21,7 @@ func (core *Core) GetFreq() (uint32, error) {
 
 // GetBaseFreq - Returns base core frequency
 func (core *Core) GetBaseFreq() (uint32, error) {
-	resp, err := common.StatRead(core.Path, "cpufreq", "base_frequency")
+	resp, err := StatRead(core.Path, "cpufreq", "base_frequency")
 	if err != nil {
 		return 0, err
 	}
@@ -37,7 +36,7 @@ func (core *Core) GetBaseFreq() (uint32, error) {
 
 // GetMaxAvailableFreq - Returns max available core frequency
 func (core *Core) GetMaxAvailableFreq() (uint32, error) {
-	resp, err := common.StatRead(core.Path, "cpufreq", "cpuinfo_max_freq")
+	resp, err := StatRead(core.Path, "cpufreq", "cpuinfo_max_freq")
 	if err != nil {
 		return 0, err
 	}
@@ -52,7 +51,7 @@ func (core *Core) GetMaxAvailableFreq() (uint32, error) {
 
 // GetMinAvailableFreq - Returns min available core frequency
 func (core *Core) GetMinAvailableFreq() (uint32, error) {
-	resp, err := common.StatRead(core.Path, "cpufreq", "cpuinfo_min_freq")
+	resp, err := StatRead(core.Path, "cpufreq", "cpuinfo_min_freq")
 	if err != nil {
 		return 0, err
 	}
@@ -67,7 +66,7 @@ func (core *Core) GetMinAvailableFreq() (uint32, error) {
 
 // GetMaxFreq - Returns max core frequency
 func (core *Core) GetMaxFreq() (uint32, error) {
-	resp, err := common.StatRead(core.Path, "cpufreq", "scaling_max_freq")
+	resp, err := StatRead(core.Path, "cpufreq", "scaling_max_freq")
 	if err != nil {
 		return 0, err
 	}
@@ -82,7 +81,7 @@ func (core *Core) GetMaxFreq() (uint32, error) {
 
 // GetMinFreq - Returns min core frequency
 func (core *Core) GetMinFreq() (uint32, error) {
-	resp, err := common.StatRead(core.Path, "cpufreq", "scaling_min_freq")
+	resp, err := StatRead(core.Path, "cpufreq", "scaling_min_freq")
 	if err != nil {
 		return 0, err
 	}
@@ -97,7 +96,7 @@ func (core *Core) GetMinFreq() (uint32, error) {
 
 // SetMaxFreq - Sets max core frequency
 func (core *Core) SetMaxFreq(freq uint32) error {
-	err := common.StatWrite(strconv.FormatUint(uint64(freq), 10), core.Path, "cpufreq", "scaling_max_freq")
+	err := StatWrite(strconv.FormatUint(uint64(freq), 10), core.Path, "cpufreq", "scaling_max_freq")
 	if err != nil {
 		return err
 	}
@@ -107,7 +106,7 @@ func (core *Core) SetMaxFreq(freq uint32) error {
 
 // SetMinFreq - Sets min core frequency
 func (core *Core) SetMinFreq(freq uint32) error {
-	err := common.StatWrite(strconv.FormatUint(uint64(freq), 10), core.Path, "cpufreq", "scaling_min_freq")
+	err := StatWrite(strconv.FormatUint(uint64(freq), 10), core.Path, "cpufreq", "scaling_min_freq")
 	if err != nil {
 		return err
 	}
@@ -117,7 +116,7 @@ func (core *Core) SetMinFreq(freq uint32) error {
 
 // GetSpeed - Returns core speed
 func (core *Core) GetSpeed() (uint32, error) {
-	resp, err := common.StatRead(core.Path, "cpufreq", "scaling_setspeed")
+	resp, err := StatRead(core.Path, "cpufreq", "scaling_setspeed")
 	if err != nil {
 		return 0, err
 	}
@@ -132,7 +131,7 @@ func (core *Core) GetSpeed() (uint32, error) {
 
 // SetSpeed - Sets core speed
 func (core *Core) SetSpeed(freq uint32) error {
-	err := common.StatWrite(strconv.FormatUint(uint64(freq), 10), core.Path, "cpufreq", "scaling_setspeed")
+	err := StatWrite(strconv.FormatUint(uint64(freq), 10), core.Path, "cpufreq", "scaling_setspeed")
 	if err != nil {
 		return err
 	}

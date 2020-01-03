@@ -3,9 +3,6 @@ package intelcpu
 import (
 	"errors"
 	"fmt"
-	"github.com/gopowersupply/intelcpu/common"
-	"github.com/gopowersupply/intelcpu/core"
-	"github.com/gopowersupply/intelcpu/errs"
 	"os"
 	"path"
 	"runtime"
@@ -28,7 +25,7 @@ func (cpu *CPU) CheckDriver() error {
 	_, err := os.Stat(path.Join(cpu.path, "intel_pstate"))
 	if err != nil {
 		if os.IsNotExist(err) {
-			return errs.NewCPUError(errors.New("intel_pstate dir isn't exist"))
+			return NewCPUError(errors.New("intel_pstate dir isn't exist"))
 		}
 		return err
 	}
@@ -38,27 +35,27 @@ func (cpu *CPU) CheckDriver() error {
 
 // GetStatus - Operation mode for driver. Active - all is ok. Passive - some problems. Off - driver disabled
 func (cpu *CPU) GetStatus() (PStateStatus, error) {
-	resp, err := common.StatRead(cpu.path, "intel_pstate", "status")
+	resp, err := StatRead(cpu.path, "intel_pstate", "status")
 	if err != nil {
-		return "", errs.NewCPUError(err)
+		return "", NewCPUError(err)
 	}
 
 	return PStateStatus(resp), nil
 }
 
 // GetCore - Returns core representation
-func (cpu *CPU) GetCore(num uint16) (*core.Core, error) {
+func (cpu *CPU) GetCore(num uint16) (*Core, error) {
 	path := fmt.Sprintf("%s%d", path.Join(cpu.path, "cpu"), num)
 
 	_, err := os.Stat(path)
 	if err != nil {
 		if os.IsNotExist(err) {
-			return nil, errs.NewCPUError(errors.New("incorrect cpu number"))
+			return nil, NewCPUError(errors.New("incorrect cpu number"))
 		}
 		return nil, err
 	}
 
-	core := &core.Core{
+	core := &Core{
 		Path: path,
 		Num:  num,
 	}
@@ -67,8 +64,8 @@ func (cpu *CPU) GetCore(num uint16) (*core.Core, error) {
 }
 
 // GetCores - Returns representation for all cores
-func (cpu *CPU) GetCores() (core.List, error) {
-	cpus := make(core.List, runtime.NumCPU())
+func (cpu *CPU) GetCores() (CoreList, error) {
+	cpus := make(CoreList, runtime.NumCPU())
 
 	for i := 0; i < len(cpus); i++ {
 		cpu, err := cpu.GetCore(uint16(i))

@@ -1,4 +1,4 @@
-package errs
+package intelcpu
 
 import (
 	"errors"
@@ -13,7 +13,7 @@ type CPUError struct {
 	inner error
 }
 
-// errs.NewCPUError - Wrapper for errors in this package
+// NewCPUError - Wrapper for errors in this package
 func NewCPUError(err error) CPUError {
 	return CPUError{
 		inner: err,

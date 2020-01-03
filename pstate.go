@@ -1,7 +1,6 @@
 package intelcpu
 
 import (
-	"github.com/gopowersupply/intelcpu/common"
 	"strconv"
 )
 
@@ -19,7 +18,7 @@ const (
 
 // GetPStatesNum - Returns number of P-States
 func (cpu *CPU) GetPStatesNum() (uint8, error) {
-	resp, err := common.StatRead(cpu.path, "intel_pstate", "num_pstates")
+	resp, err := StatRead(cpu.path, "intel_pstate", "num_pstates")
 	if err != nil {
 		return 0, err
 	}

@@ -1,7 +1,6 @@
-package core
+package intelcpu
 
 import (
-	"github.com/gopowersupply/intelcpu/common"
 	"strings"
 )
 
@@ -26,7 +25,7 @@ const (
 
 // GetAvailableGovernors - Returns available governors
 func (core *Core) GetAvailableGovernors() ([]CPUCoreGovernor, error) {
-	resp, err := common.StatRead(core.Path, "cpufreq", "scaling_available_governors")
+	resp, err := StatRead(core.Path, "cpufreq", "scaling_available_governors")
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +41,7 @@ func (core *Core) GetAvailableGovernors() ([]CPUCoreGovernor, error) {
 
 // GetGovernor - Returns current governor
 func (core *Core) GetGovernor() (CPUCoreGovernor, error) {
-	resp, err := common.StatRead(core.Path, "cpufreq", "scaling_governor")
+	resp, err := StatRead(core.Path, "cpufreq", "scaling_governor")
 	if err != nil {
 		return "", err
 	}
@@ -52,7 +51,7 @@ func (core *Core) GetGovernor() (CPUCoreGovernor, error) {
 
 // SetGovernor - Sets governor
 func (core *Core) SetGovernor(governor CPUCoreGovernor) error {
-	err := common.StatWrite(string(governor), core.Path, "cpufreq", "scaling_governor")
+	err := StatWrite(string(governor), core.Path, "cpufreq", "scaling_governor")
 	if err != nil {
 		return err
 	}
