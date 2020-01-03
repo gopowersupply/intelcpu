@@ -6,6 +6,8 @@ import (
 )
 
 // IsOfflineAvailable - Returns cpu offline availability
+//
+// Some of cores, e.g. Core_0, can't be offline.
 func (core *Core) IsOfflineAvailable() (bool, error) {
 	_, err := os.Stat(path.Join(core.Path, "online"))
 	if err != nil {
@@ -19,6 +21,8 @@ func (core *Core) IsOfflineAvailable() (bool, error) {
 }
 
 // IsOnline - Returns current cpu online status
+//
+// Some cores, like first, online always.
 func (core *Core) IsOnline() (bool, error) {
 	canBeOffline, err := core.IsOfflineAvailable()
 	if err != nil {
@@ -43,6 +47,8 @@ func (core *Core) IsOnline() (bool, error) {
 }
 
 // SetOnline - Sets cpu online status
+//
+// It possible to disable (make core offline) any number of cores and stay you system running on 4 cores of 8 for example.
 func (core *Core) SetOnline(online bool) error {
 	stat := "1"
 	if !online {

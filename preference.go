@@ -5,19 +5,21 @@ import (
 )
 
 // CPUPreference - CPU performance mode
+//
+// In simple, it means how fast the CPU will be accelerating.
 // see: https://www.kernel.org/doc/html/v4.13/admin-guide/pm/intel_pstate.html
 type CPUPreference string
 
 const (
-	// CPUPreferenceDefault - Default mode
+	// CPUPreferenceDefault - Default mode. OS will be select modes based on power mode.
 	CPUPreferenceDefault CPUPreference = "default"
-	// CPUPreferencePerformance - CPU will be acceleration as fast as possible
+	// CPUPreferencePerformance - Max performance. CPU will be acceleration as fast as possible
 	CPUPreferencePerformance CPUPreference = "performance"
-	// CPUPreferenceBalancePerformance - CPU will be accelerating in middle speed
+	// CPUPreferenceBalancePerformance - Performance preferred. CPU will be accelerating in middle speed
 	CPUPreferenceBalancePerformance CPUPreference = "balance_performance"
-	// CPUPreferenceBalancePower - CPU will be accelerating lower than middle speed
+	// CPUPreferenceBalancePower - Power saving preferred. CPU will be accelerating lower than middle speed
 	CPUPreferenceBalancePower CPUPreference = "balance_power"
-	// CPUPreferencePower - CPU will be accelerating as low as possible
+	// CPUPreferencePower - Power saving. CPU will be accelerating as low as possible
 	CPUPreferencePower CPUPreference = "power"
 )
 

@@ -5,8 +5,8 @@ import (
 	"fmt"
 )
 
-// ErrCommon - General error text for all errors from this package
-const ErrCommon = "intelcpu common error"
+// errCommon - General error text for all errors from this package
+const errCommon = "intelcpu common error"
 
 // CPUError - Error object for all error in this package
 type CPUError struct {
@@ -14,6 +14,7 @@ type CPUError struct {
 }
 
 // NewCPUError - Wrapper for errors in this package
+// You can use this function to make your own CPU error
 func NewCPUError(err error) CPUError {
 	return CPUError{
 		inner: err,
@@ -21,7 +22,7 @@ func NewCPUError(err error) CPUError {
 }
 
 func (err CPUError) Error() string {
-	return fmt.Sprintf("%s: %s", ErrCommon, err.inner.Error())
+	return fmt.Sprintf("%s: %s", errCommon, err.inner.Error())
 }
 
 // Unwrap - Returns inner error

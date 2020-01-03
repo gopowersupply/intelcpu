@@ -11,19 +11,21 @@ type CPUCoreGovernor string
 const (
 	// CPUGovernorOnDemand - CPU will be using low freq as long as possible but hi-freq also available if it really needed
 	CPUGovernorOnDemand CPUCoreGovernor = "ondemand"
-	// CPUGovernorPowersave - CPU will be using lowest frequency
+	// CPUGovernorPowersave - Most common governor. CPU will be using lowest frequency as long as possible
 	CPUGovernorPowersave CPUCoreGovernor = "powersave"
 	// CPUGovernorConservative - Same as OnDemand but freq will be changing more smoothly
 	CPUGovernorConservative CPUCoreGovernor = "conservative"
 	// CPUGovernorUserspace - Allow to set your own freq by writing to /sys/devices/system/cpu/cpufreq/policy0/scaling_setspeed
 	CPUGovernorUserspace CPUCoreGovernor = "userspace"
-	// CPUGovernorPerformance - CPU will be using hi-freq as long as possible
+	// CPUGovernorPerformance - Most common governor. CPU will be using hi-freq as long as possible
 	CPUGovernorPerformance CPUCoreGovernor = "performance"
 	// CPUGovernorSchedutil - Something hard, see: https://www.kernel.org/doc/html/v4.12/admin-guide/pm/cpufreq.html#schedutil
 	CPUGovernorSchedutil CPUCoreGovernor = "schedutil"
 )
 
 // GetAvailableGovernors - Returns available governors
+//
+// In most cases intel_pstate have only 2 governors: performance and powersave
 func (core *Core) GetAvailableGovernors() ([]CPUCoreGovernor, error) {
 	resp, err := statRead(core.Path, "cpufreq", "scaling_available_governors")
 	if err != nil {

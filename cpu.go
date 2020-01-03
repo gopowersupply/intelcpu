@@ -1,3 +1,4 @@
+// The package to allow interaction with intel_pstate driver to drive CPU frequency and politics.
 package intelcpu
 
 import (
@@ -21,6 +22,9 @@ func New() *CPU {
 }
 
 // CheckDriver - Checks for Intel Power Management driver
+//
+// Nil means that driver installed, but it should be additional checked by GetStatus().
+// Most of non-nil errors mean that intel_pstate driver is not installed.
 func (cpu *CPU) CheckDriver() error {
 	_, err := os.Stat(path.Join(cpu.path, "intel_pstate"))
 	if err != nil {
@@ -33,7 +37,16 @@ func (cpu *CPU) CheckDriver() error {
 	return nil
 }
 
-// GetStatus - Operation mode for driver. Active - all is ok. Passive - some problems. Off - driver disabled
+// GetStatus - Operation mode for driver
+//
+// Statuses
+//
+// Active - all is ok, driver ready.
+//
+// Passive - some problems, some of features may not working or ignored.
+// Usually it caused when intel_pstate can't recognize the CPU.
+//
+// Off - driver disabled, nothing to work.
 func (cpu *CPU) GetStatus() (PStateStatus, error) {
 	resp, err := statRead(cpu.path, "intel_pstate", "status")
 	if err != nil {
