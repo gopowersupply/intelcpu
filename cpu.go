@@ -1,4 +1,4 @@
-// The package to allow interaction with intel_pstate driver to drive CPU frequency and politics.
+// Package intelcpu provides interaction with intel_pstate driver to drive CPU frequency and politics.
 package intelcpu
 
 import (
