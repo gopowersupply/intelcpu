@@ -23,7 +23,7 @@ const (
 
 // GetAvailablePreferences - Returns available performance preferences
 func (core *Core) GetAvailablePreferences() ([]CPUPreference, error) {
-	resp, err := StatRead(core.Path, "cpufreq", "energy_performance_available_preferences")
+	resp, err := statRead(core.Path, "cpufreq", "energy_performance_available_preferences")
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +39,7 @@ func (core *Core) GetAvailablePreferences() ([]CPUPreference, error) {
 
 // GetPreference - Returns current power preference
 func (core *Core) GetPreference() (CPUPreference, error) {
-	resp, err := StatRead(core.Path, "cpufreq", "energy_performance_preference")
+	resp, err := statRead(core.Path, "cpufreq", "energy_performance_preference")
 	if err != nil {
 		return "", err
 	}
@@ -49,7 +49,7 @@ func (core *Core) GetPreference() (CPUPreference, error) {
 
 // SetPreference - Sets power preference
 func (core *Core) SetPreference(preference CPUPreference) error {
-	err := StatWrite(string(preference), core.Path, "cpufreq", "energy_performance_preference")
+	err := statWrite(string(preference), core.Path, "cpufreq", "energy_performance_preference")
 	if err != nil {
 		return err
 	}

@@ -6,7 +6,7 @@ import (
 
 // IsTurbo - TurboBoost status
 func (cpu *CPU) IsTurbo() (bool, error) {
-	resp, err := StatRead(cpu.path, "intel_pstate", "no_turbo")
+	resp, err := statRead(cpu.path, "intel_pstate", "no_turbo")
 	if err != nil {
 		return false, err
 	}
@@ -28,7 +28,7 @@ func (cpu *CPU) SetTurbo(status bool) error {
 		stat = "0"
 	}
 
-	err := StatWrite(stat, cpu.path, "intel_pstate", "no_turbo")
+	err := statWrite(stat, cpu.path, "intel_pstate", "no_turbo")
 	if err != nil {
 		return err
 	}

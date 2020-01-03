@@ -25,7 +25,7 @@ const (
 
 // GetAvailableGovernors - Returns available governors
 func (core *Core) GetAvailableGovernors() ([]CPUCoreGovernor, error) {
-	resp, err := StatRead(core.Path, "cpufreq", "scaling_available_governors")
+	resp, err := statRead(core.Path, "cpufreq", "scaling_available_governors")
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ func (core *Core) GetAvailableGovernors() ([]CPUCoreGovernor, error) {
 
 // GetGovernor - Returns current governor
 func (core *Core) GetGovernor() (CPUCoreGovernor, error) {
-	resp, err := StatRead(core.Path, "cpufreq", "scaling_governor")
+	resp, err := statRead(core.Path, "cpufreq", "scaling_governor")
 	if err != nil {
 		return "", err
 	}
@@ -51,7 +51,7 @@ func (core *Core) GetGovernor() (CPUCoreGovernor, error) {
 
 // SetGovernor - Sets governor
 func (core *Core) SetGovernor(governor CPUCoreGovernor) error {
-	err := StatWrite(string(governor), core.Path, "cpufreq", "scaling_governor")
+	err := statWrite(string(governor), core.Path, "cpufreq", "scaling_governor")
 	if err != nil {
 		return err
 	}

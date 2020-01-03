@@ -29,7 +29,7 @@ func (core *Core) IsOnline() (bool, error) {
 		return true, nil
 	}
 
-	resp, err := StatRead(core.Path, "online")
+	resp, err := statRead(core.Path, "online")
 	if err != nil {
 		return false, err
 	}
@@ -49,7 +49,7 @@ func (core *Core) SetOnline(online bool) error {
 		stat = "0"
 	}
 
-	err := StatWrite(stat, core.Path, "online")
+	err := statWrite(stat, core.Path, "online")
 	if err != nil {
 		return err
 	}

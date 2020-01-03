@@ -8,7 +8,7 @@ import (
 
 // GetMinPerf - Returns min performance percent
 func (cpu *CPU) GetMinPerf() (float32, error) {
-	resp, err := StatRead(cpu.path, "intel_pstate", "min_perf_pct")
+	resp, err := statRead(cpu.path, "intel_pstate", "min_perf_pct")
 	if err != nil {
 		return 0, err
 	}
@@ -27,7 +27,7 @@ func (cpu *CPU) SetMinPerf(prc float32) error {
 		return NewCPUError(errors.New("percent must be in [0..1]"))
 	}
 
-	err := StatWrite(strconv.Itoa(int(prc*100)), cpu.path, "intel_pstate", "min_perf_pct")
+	err := statWrite(strconv.Itoa(int(prc*100)), cpu.path, "intel_pstate", "min_perf_pct")
 	if err != nil {
 		return err
 	}
@@ -37,7 +37,7 @@ func (cpu *CPU) SetMinPerf(prc float32) error {
 
 // GetMaxPerf - Returns max performance percent
 func (cpu *CPU) GetMaxPerf() (float32, error) {
-	resp, err := StatRead(cpu.path, "intel_pstate", "max_perf_pct")
+	resp, err := statRead(cpu.path, "intel_pstate", "max_perf_pct")
 	if err != nil {
 		return 0, err
 	}
@@ -56,7 +56,7 @@ func (cpu *CPU) SetMaxPerf(prc float32) error {
 		return NewCPUError(errors.New("percent must be in [0..1]"))
 	}
 
-	err := StatWrite(strconv.Itoa(int(prc*100)), cpu.path, "intel_pstate", "max_perf_pct")
+	err := statWrite(strconv.Itoa(int(prc*100)), cpu.path, "intel_pstate", "max_perf_pct")
 	if err != nil {
 		return err
 	}

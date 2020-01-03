@@ -18,7 +18,7 @@ const (
 
 // GetPStatesNum - Returns number of P-States
 func (cpu *CPU) GetPStatesNum() (uint8, error) {
-	resp, err := StatRead(cpu.path, "intel_pstate", "num_pstates")
+	resp, err := statRead(cpu.path, "intel_pstate", "num_pstates")
 	if err != nil {
 		return 0, err
 	}

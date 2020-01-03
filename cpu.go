@@ -35,7 +35,7 @@ func (cpu *CPU) CheckDriver() error {
 
 // GetStatus - Operation mode for driver. Active - all is ok. Passive - some problems. Off - driver disabled
 func (cpu *CPU) GetStatus() (PStateStatus, error) {
-	resp, err := StatRead(cpu.path, "intel_pstate", "status")
+	resp, err := statRead(cpu.path, "intel_pstate", "status")
 	if err != nil {
 		return "", NewCPUError(err)
 	}

@@ -5,8 +5,8 @@ import (
 	"path"
 )
 
-// StatRead - Reads value from file
-func StatRead(filepath ...string) (string, error) {
+// statRead - Reads value from file
+func statRead(filepath ...string) (string, error) {
 	file := path.Join(filepath...)
 
 	data, err := ioutil.ReadFile(file)
@@ -17,8 +17,8 @@ func StatRead(filepath ...string) (string, error) {
 	return string(data), nil
 }
 
-// StatWrite - Writes value to file
-func StatWrite(data string, filepath ...string) error {
+// statWrite - Writes value to file
+func statWrite(data string, filepath ...string) error {
 	file := path.Join(filepath...)
 
 	if err := ioutil.WriteFile(file, []byte(data), 222); err != nil {
