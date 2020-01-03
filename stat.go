@@ -3,6 +3,7 @@ package intelcpu
 import (
 	"io/ioutil"
 	"path"
+	"strings"
 )
 
 // statRead - Reads value from file
@@ -14,7 +15,9 @@ func statRead(filepath ...string) (string, error) {
 		return "", NewCPUError(err)
 	}
 
-	return string(data), nil
+	res := strings.TrimSpace(string(data))
+
+	return res, nil
 }
 
 // statWrite - Writes value to file
