@@ -1,7 +1,7 @@
 [![GitHub](https://img.shields.io/github/license/gopowersupply/intelcpu)](https://intelcpu/blob/master/LICENSE)
 [![Go version](https://img.shields.io/github/go-mod/go-version/gopowersupply/intelcpu)](https://blog.golang.org/go1.13)
-[![Build Status](https://travis-ci.org/gopowersupply/intelcpu.svg?branch=master)](https://travis-ci.org/gopowersupply/intelcpu)
 [![Go Report Card](https://goreportcard.com/badge/gopowersupply/intelcpu)](http://goreportcard.com/report/gopowersupply/intelcpu)
+[![code-coverage](http://gocover.io/_badge/github.com/gopowersupply/intelcpu)](https://gocover.io/github.com/gopowersupply/intelcpu)
 [![GoDoc](https://godoc.org/github.com/gopowersupply/intelcpu?status.svg)](https://godoc.org/github.com/gopowersupply/intelcpu)
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/gopowersupply/intelcpu)](https://github.com/gopowersupply/intelcpu/releases)
 [![GitHub last commit](https://img.shields.io/github/last-commit/gopowersupply/intelcpu)](https://intelcpu/commits/master)
